@@ -35,9 +35,9 @@ class AnimatedCard: UIView {
     func animateCard(destinationY: CGFloat) {
         var animator: UIViewPropertyAnimator!
         animator = UIViewPropertyAnimator(duration:1.5, curve: .easeInOut, animations: {
-                self.center.y = destinationY
-                self.alpha = 1
-            }
+            self.center.y = destinationY
+            self.alpha = 1
+        }
         )
         animator.startAnimation()
     }
@@ -45,5 +45,48 @@ class AnimatedCard: UIView {
     func skipAnimation(destinationY: CGFloat) {
         self.center.y = destinationY
         self.alpha = 1
+    }
+    
+    func generateConstraints(object: UIView) -> [NSLayoutConstraint]{
+        let constraints = [
+            NSLayoutConstraint(
+                item: self,
+                attribute: NSLayoutConstraint.Attribute.centerX,
+                relatedBy: NSLayoutConstraint.Relation.equal,
+                toItem: object,
+                attribute: NSLayoutConstraint.Attribute.centerX,
+                multiplier: 1,
+                constant: 0
+                ),
+            NSLayoutConstraint(
+                item: self,
+                attribute: NSLayoutConstraint.Attribute.centerY,
+                relatedBy: NSLayoutConstraint.Relation.lessThanOrEqual,
+                toItem: object,
+                attribute: NSLayoutConstraint.Attribute.centerY,
+                multiplier: 1.6,
+                constant: 0
+            ),
+            NSLayoutConstraint(
+                item: self,
+                attribute: NSLayoutConstraint.Attribute.width,
+                relatedBy: NSLayoutConstraint.Relation.equal,
+                toItem: object,
+                attribute: NSLayoutConstraint.Attribute.width,
+                multiplier: 0.9,
+                constant: 0
+            ),
+            NSLayoutConstraint(
+                item: self,
+                attribute: NSLayoutConstraint.Attribute.height,
+                relatedBy: NSLayoutConstraint.Relation.equal,
+                toItem: object,
+                attribute: NSLayoutConstraint.Attribute.height,
+                multiplier: 1,
+                constant: 0
+            )
+        ];
+        
+        return constraints;
     }
 }
